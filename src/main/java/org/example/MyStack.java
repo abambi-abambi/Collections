@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.EmptyStackException;
 
-class MyStack {
+public class MyStack {
     int counter = 0;
     int[] arr= new int[10];
 

@@ -93,9 +93,6 @@ public class MyQueue {
     }
 
     Integer poll() {
-        System.out.println(isMaster);
-        System.out.println(masterStack.empty());
-        System.out.println(slaveStack.empty());
         if (isMaster == true) {
             if (masterStack.empty()) {
                 return null;
