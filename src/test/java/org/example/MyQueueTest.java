@@ -3,36 +3,33 @@ package org.example;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class MyQueueTest {
     MyQueue queue = new MyQueue();
 
     @Test
     public void add() {
-        assertDoesNotThrow(() -> queue.add(1));
-        assertEquals(true, queue.add(2));
-        for (int i = 0; i < 8; i++) {
-            queue.add(i);
+        for (int i = 1; i <= 10; i++) {
+            assertEquals(true, queue.add(i));
         }
-        assertThrows(IllegalStateException.class, () -> queue.add(15));
+        assertThrows(IllegalStateException.class, () -> queue.add(11));
     }
 
     @Test
     public void offer() {
-        assertEquals(true, queue.offer(3));
-        for (int i = 0; i < 9; i++) {
-            queue.offer(i);
+        for (int i = 1; i <= 10; i++) {
+            assertEquals(true, queue.offer(i));
         }
-        assertEquals(false, queue.offer(15));
+        assertEquals(false, queue.offer(10));
     }
 
     @Test
     public void peek() {
         assertEquals(null, queue.peek());
         queue.add(1);
+        assertEquals(1, queue.peek());
+        queue.add(2);
         assertEquals(1, queue.peek());
     }
 
@@ -41,19 +38,27 @@ public class MyQueueTest {
         assertThrows(NoSuchElementException.class, () -> queue.element());
         queue.add(1);
         assertEquals(1, queue.element());
+        queue.add(2);
+        assertEquals(1, queue.element());
     }
 
     @Test
     public void remove() {
         assertThrows(NoSuchElementException.class, () -> queue.remove());
         queue.add(1);
-        assertEquals(1, queue.poll());
+        queue.add(2);
+        assertEquals(1, queue.remove());
+        assertEquals(2, queue.remove());
     }
 
     @Test
     public void poll() {
         assertEquals(null, queue.poll());
-        queue.add(1);
-        assertEquals(1, queue.poll());
+        for (int i = 1; i <= 10; i++) {
+            queue.add(i);
+        }
+        for (int i = 1; i <= 10; i++) {
+            assertEquals(i, queue.poll());
+        }
     }
 }
